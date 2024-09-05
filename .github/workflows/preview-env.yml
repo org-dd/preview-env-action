@@ -25,11 +25,11 @@ jobs:
 
       - name: Create directory for source code
         run: |
-          ssh ${{ secrets.VM_USER }}@${{ secrets.VM_IP }} "mkdir /home/preview/$(CONTAINER_NAME)"
+          ssh ${{ secrets.VM_USER }}@${{ secrets.VM_IP }} "mkdir /home/preview/$CONTAINER_NAME"
 
       - name: Copy files to VM
         run: |
-          scp -o StrictHostKeyChecking=no -r $(pwd) ${{ secrets.VM_USER }}@${{ secrets.VM_IP }}:/home/preview/$(CONTAINER_NAME)/
+          scp -o StrictHostKeyChecking=no -r $(pwd) ${{ secrets.VM_USER }}@${{ secrets.VM_IP }}:/home/preview/$CONTAINER_NAME/
 
       - name: Run Docker container
         run: |
