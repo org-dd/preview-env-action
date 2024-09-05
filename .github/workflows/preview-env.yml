@@ -22,7 +22,7 @@ jobs:
       - name: Build Docker image
         if: github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'synchronize'
         run: |
-          docker build -t $CONTAINER_NAME .
+          docker build -t . $CONTAINER_NAME
           docker run -d --name $CONTAINER_NAME -p 8080:80 $CONTAINER_NAME
 
       - name: Check if PR is closed
