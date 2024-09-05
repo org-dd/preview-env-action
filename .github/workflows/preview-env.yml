@@ -1,4 +1,4 @@
-name: Manage Preview Environment
+name: Deploy to virtual machine
 
 on:
   pull_request:
