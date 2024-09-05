@@ -18,8 +18,8 @@ jobs:
           PR_NUMBER=${{ github.event.pull_request.number }}
           CONTAINER_NAME=${REPO_NAME}-pr-${PR_NUMBER}
           CONTAINER_SOURCE=/home/${{ secrets.VM_USER }}/${CONTAINER_NAME}/
-          echo "container_name=${CONTAINER_NAME}" >> $GITHUB_ENV
-          echo "container_source=${CONTAINER_SOURCE}" >> $GITHUB_ENV
+          echo "CONTAINER_NAME=${CONTAINER_NAME}" >> $GITHUB_ENV
+          echo "CONTAINER_SOURCE=${CONTAINER_SOURCE}" >> $GITHUB_ENV
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
