@@ -1,0 +1,24 @@
+name: Manage Preview Environment
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+jobs:
+  manage-preview:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if PR is opened or reopened
+        if: github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'synchronize'
+        run: |
+          ./deploy-preview.sh ${{ github.event.pull_request.number }}
+
+      - name: Check if PR is closed
+        if: github.event.action == 'closed'
+        run: |
+          if [ ${{ github.event.pull_request.merged }} == 'false' ]; then
+            ./remove-preview.sh ${{ github.event.pull_request.number }}
+          else
+            ./remove-preview.sh ${{ github.event.pull_request.number }}
+          fi
