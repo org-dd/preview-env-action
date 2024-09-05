@@ -25,7 +25,7 @@ jobs:
 
       - name: Create directory for source code
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USER }}@${{ secrets.VM_IP }} "mkdir /home/${{ secrets.VM_USER }}/$CONTAINER_NAME"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USER }}@${{ secrets.VM_IP }} "mkdir -p /home/${{ secrets.VM_USER }}/$CONTAINER_NAME/"
 
       - name: Copy files to VM
         run: |
