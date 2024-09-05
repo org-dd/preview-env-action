@@ -19,7 +19,7 @@ jobs:
 
       - name: Copy files to Oracle VM
         run: |
-          scp -o StrictHostKeyChecking=no -r $pwd ${{ secrets.VM_USER }}@${{ secrets.VM_IP }}:/home/oracle/app/
+          scp -o StrictHostKeyChecking=no -r $(pwd) ${{ secrets.VM_USER }}@${{ secrets.VM_IP }}:/home/oracle/app/
 
       # - name: Setup container name
       #   run: |
