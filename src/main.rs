@@ -19,7 +19,9 @@ pub fn routes() -> Router<AppState> {
     Router::new().route("/github", post(github_handler))
 }
 
-async fn github_handler() -> impl IntoResponse {}
+async fn github_handler() -> impl IntoResponse {
+    "gi hubs"
+}
 
 pub fn get_address() -> String {
     format!("{}:{}", Ipv4Addr::UNSPECIFIED.to_string(), 8000)
