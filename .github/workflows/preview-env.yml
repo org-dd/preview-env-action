@@ -9,16 +9,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check if PR is opened or reopened
+      - name: Check out the repository
+        uses: actions/checkout@v3
+
+      - name: Setup container name
+        run: |
+          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+          PR_NUMBER=${{ github.event.pull_request.number }}
+          CONTAINER_NAME="${REPO_NAME}-pr-${PR_NUMBER}"
+          echo "container_name=${CONTAINER_NAME}" >> $GITHUB_ENV
+
+      - name: Build Docker image
         if: github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'synchronize'
         run: |
-          ./deploy-preview.sh ${{ github.event.pull_request.number }}
+          docker build -t $CONTAINER_NAME .
+          docker run -d --name $CONTAINER_NAME -p 8080:80 $CONTAINER_NAME
 
       - name: Check if PR is closed
         if: github.event.action == 'closed'
         run: |
-          if [ ${{ github.event.pull_request.merged }} == 'false' ]; then
-            ./remove-preview.sh ${{ github.event.pull_request.number }}
-          else
-            ./remove-preview.sh ${{ github.event.pull_request.number }}
-          fi
+          docker stop $CONTAINER_NAME
