@@ -18,6 +18,7 @@ jobs:
           PR_NUMBER=${{ github.event.pull_request.number }}
           CONTAINER_NAME=${REPO_NAME}-pr-${PR_NUMBER}
           CONTAINER_SOURCE=/home/${{ secrets.VM_USER }}/${CONTAINER_NAME}/
+          echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV
           echo "CONTAINER_NAME=${CONTAINER_NAME}" >> $GITHUB_ENV
           echo "CONTAINER_SOURCE=${CONTAINER_SOURCE}" >> $GITHUB_ENV
 
