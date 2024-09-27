@@ -33,6 +33,8 @@ jobs:
 
       - name: Copy files to VM
         run: |
+          pwd
+          echo $REPO_NAME
           scp -o StrictHostKeyChecking=no -r $REPO_NAME ${{ secrets.VM_USER }}@${{ secrets.VM_IP }}:$CONTAINER_SOURCE
 
       - name: Run Docker container
