@@ -39,4 +39,4 @@ jobs:
 
       - name: Run Docker container
         run: |
-          ssh ${{ secrets.VM_USER }}@${{ secrets.VM_IP }} "cd $CONTAINER_SOURCE && docker build -t $CONTAINER_NAME . && docker run -d -p 8000:80 $CONTAINER_NAME"
+          ssh ${{ secrets.VM_USER }}@${{ secrets.VM_IP }} "cd $CONTAINER_SOURCE && docker build -t $CONTAINER_NAME . && docker run -d -p 80:8000 $CONTAINER_NAME"
