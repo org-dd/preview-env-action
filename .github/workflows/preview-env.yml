@@ -29,7 +29,7 @@ jobs:
 
       - name: Create directory for source code
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USER }}@${{ secrets.VM_IP }} "mkdir -p $CONTAINER_SOURCE"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USER }}@${{ secrets.VM_IP }} "rm -r $CONTAINER_SOURCE; mkdir $CONTAINER_SOURCE"
 
       - name: Copy files to VM
         run: |
