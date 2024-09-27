@@ -1,6 +1,6 @@
 use std::net::Ipv4Addr;
 
-use axum::{http::Method, response::IntoResponse, routing::post, Router};
+use axum::{http::Method, response::IntoResponse, routing::get, Router};
 use tokio::net::TcpListener;
 use tower_http::cors::{AllowHeaders, Any, CorsLayer};
 use tower_http::trace::{self, TraceLayer};
@@ -16,10 +16,12 @@ impl AppState {
 }
 
 pub fn routes() -> Router<AppState> {
-    Router::new().route("/github", post(github_handler))
+    Router::new().route("/github", get(github_handler))
 }
 
-async fn github_handler() -> impl IntoResponse {}
+async fn github_handler() -> impl IntoResponse {
+    "gi hubs"
+}
 
 pub fn get_address() -> String {
     format!("{}:{}", Ipv4Addr::UNSPECIFIED.to_string(), 8000)
@@ -27,8 +29,7 @@ pub fn get_address() -> String {
 
 #[tokio::main]
 async fn main() {
-    tracing_subscriber::fmt()
-        .init();
+    tracing_subscriber::fmt().init();
 
     let trace_layer = TraceLayer::new_for_http()
         .make_span_with(trace::DefaultMakeSpan::new().level(Level::INFO))
